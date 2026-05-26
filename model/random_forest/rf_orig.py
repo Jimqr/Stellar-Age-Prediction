@@ -13,7 +13,9 @@ from rich.table import Table
 
 import joblib
 import os
+import warnings
 
+warnings.filterwarnings("ignore")
 os.system('clear')
 
 print('main menu -> random forest menu -> [1] | this would takes some moment')
@@ -51,7 +53,7 @@ try:
     min_samples_split=2,
     max_features='sqrt',
     random_state=42,
-    n_jobs=-1)
+    n_jobs=1)
 
     best_model.fit(X_train, y_train)
 
@@ -62,7 +64,8 @@ try:
     X,
     y,
     cv = RepeatedKFold(n_splits=5, n_repeats=3, random_state=42),
-    scoring='r2')
+    scoring='r2',
+    n_jobs=1)
     
     print("Cross Validation R² Scores:", cv_scores)
     print("Mean CV R²:", np.mean(cv_scores))
